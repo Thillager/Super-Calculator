@@ -6,6 +6,7 @@ import java.util.*;
 import java.util.regex.*;
 import java.io.*;
 import java.nio.file.*;
+import java.util.Locale;
 
 public class Main extends JFrame {
     private JTextField inputField;
@@ -163,7 +164,7 @@ public class Main extends JFrame {
                 resultField.setText(diffConst == 0 ? "Unendlich viele Lösungen" : "Keine Lösung");
             } else {
                 double x = diffConst / diffVar;
-                String xStr = (x == (long)x) ? "" + (long)x : String.format("%.2f", x);
+                String xStr = (x == (long)x) ? "" + (long)x : String.format(Locale.US, "%.2f", x);
                 resultField.setText(varName + " = " + xStr);
             }
         } catch (Exception e) { resultField.setText("Fehler in der Gleichung!"); }
@@ -204,7 +205,9 @@ public class Main extends JFrame {
                 if(v==0) continue;
                 if(sb.length()>0) sb.append(v>0 ? " + " : " - "); else if(v<0) sb.append("-");
                 double av = Math.abs(v);
-                if(av!=1.0 || var.isEmpty()){ if(av==(long)av) sb.append((long)av); else sb.append(av); }
+                if(av!=1.0 || var.isEmpty()){
+                    if(av==(long)av) sb.append((long)av); else sb.append(String.format(Locale.US, "%.2f", av));
+                }
                 sb.append(var);
             }
             return sb.toString();
