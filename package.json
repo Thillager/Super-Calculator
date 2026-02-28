@@ -3,6 +3,6 @@
   "version": "1.0.0",
   "jdeploy": {
     "mainClass": "com.beispiel.Main",
-    "jar": "target/mein-projekt-1.0.0.jar"
+    "jar": "target/myartifactid-0.0-SNAPSHOT.jar"
   }
 }
