@@ -10,12 +10,13 @@ import java.util.Locale;
 
 public class Main extends JFrame {
     private JTextField inputField;
-    private JButton calcBinom, calcNormal, solveBtn, clearBtn, copyBtn, tempumrechBtn;
+    private JButton calcBinom, calcNormal, solveBtn, clearBtn, copyBtn, tempumrechBtn, themeBtn;
     private JTextField resultField;
+    private boolean isDarkTheme = true;
 
     public Main() {
         setTitle("Super Taschenrechner");
-        setSize(700, 500);
+        setSize(700, 520);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         getContentPane().setBackground(Color.BLACK);
         setLayout(new FlowLayout(FlowLayout.CENTER, 15, 15));
@@ -23,17 +24,16 @@ public class Main extends JFrame {
         // UI-Design
         JLabel label = new JLabel("Aufgabe:");
         label.setFont(new Font("Arial", Font.BOLD, 14));
-        add(label);
         label.setForeground(Color.WHITE);
-        label.setBackground(Color.BLACK);
+        add(label);
 
         inputField = new JTextField(40);
         inputField.setFont(new Font("SansSerif", Font.PLAIN, 18));
-        add(inputField);
         inputField.setBackground(Color.BLACK);
         inputField.setForeground(Color.WHITE);
         inputField.setCaretColor(Color.WHITE);
         inputField.setFocusTraversalKeysEnabled(false);
+        add(inputField);
 
         // Buttons
         calcBinom = new JButton("Binomische Formel");
@@ -48,13 +48,16 @@ public class Main extends JFrame {
         clearBtn = new JButton("Löschen");
         styleButton(clearBtn, new Color(231, 76, 60)); //rot für löschen
 
-        copyBtn = new JButton("Kopieren (buggt und funktioniert glb nicht)");
+        copyBtn = new JButton("Kopieren");
         styleButton(copyBtn, new Color(149, 165, 166)); //grau für kopieren
 
         tempumrechBtn = new JButton("Temperaturumrechnung");
         styleButton(tempumrechBtn, new Color(243, 156, 18)); //orange für tempumrechnung
+
+        themeBtn = new JButton("Theme wechseln");
+        styleButton(themeBtn, new Color(52, 73, 94));
         
-        add(calcNormal); add(calcBinom); add(solveBtn); add(tempumrechBtn); add(clearBtn); add(copyBtn);
+        add(calcNormal); add(calcBinom); add(solveBtn); add(tempumrechBtn); add(clearBtn); add(copyBtn); add(themeBtn);
 
         JLabel ergLabel = new JLabel("Ergebnis:");
         ergLabel.setForeground(Color.WHITE);
@@ -63,7 +66,7 @@ public class Main extends JFrame {
         resultField = new JTextField("Warte auf Eingabe...", 55);
         resultField.setEditable(false);
         resultField.setBorder(null);
-        resultField.setBackground(null);
+        resultField.setOpaque(false);
         resultField.setHorizontalAlignment(JTextField.CENTER);
         resultField.setFont(new Font("Monospaced", Font.BOLD, 22));
         resultField.setForeground(Color.WHITE);
@@ -82,12 +85,35 @@ public class Main extends JFrame {
             JOptionPane.showMessageDialog(this, "Kopiert!");
         });
         tempumrechBtn.addActionListener(e -> starteTemp());
+        themeBtn.addActionListener(e -> toggleTheme());
+    }
+
+    private void toggleTheme() {
+        isDarkTheme = !isDarkTheme;
+        Color bg = isDarkTheme ? Color.BLACK : Color.WHITE;
+        Color fg = isDarkTheme ? Color.WHITE : Color.BLACK;
+
+        getContentPane().setBackground(bg);
+        for (Component c : getContentPane().getComponents()) {
+            if (c instanceof JLabel) {
+                c.setForeground(fg);
+            }
+        }
+        inputField.setBackground(bg);
+        inputField.setForeground(fg);
+        inputField.setCaretColor(fg);
+        resultField.setForeground(fg);
     }
 
     private void styleButton(JButton b, Color c) {
-        b.setBackground(c); b.setForeground(Color.WHITE);
-        b.setFocusPainted(false); b.setFont(new Font("Arial", Font.BOLD, 12));
+        b.setBackground(c);
+        b.setForeground(Color.WHITE);
+        b.setFocusPainted(false);
+        b.setFont(new Font("Arial", Font.BOLD, 12));
         b.setFocusable(false);
+        b.setBorder(BorderFactory.createRaisedBevelBorder());
+        b.setContentAreaFilled(true);
+        b.setOpaque(true);
     }
 
     private void starteTemp() {
