@@ -112,7 +112,7 @@ public class Main extends JFrame {
         b.setFont(new Font("Arial", Font.BOLD, 12));
         b.setFocusable(false);
         b.setBorder(BorderFactory.createRaisedBevelBorder());
-        b.setContentAreaFilled(true);
+        b.setContentAreaFilled(false);
         b.setOpaque(true);
     }
 
