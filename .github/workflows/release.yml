@@ -2,7 +2,7 @@ name: jDeploy Release
 on:
   push:
     tags:
-      - 'v*' # Triggert nur bei Tags wie v1.0, v2.1 etc.
+      - 'V*' # Triggert nur bei Tags wie v1.0, v2.1 etc.
 
 jobs:
   build:
