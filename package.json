@@ -5,9 +5,7 @@
   "jdeploy": {
     "mainClass": "Main",
     "jar": "target/myartifactid-0.0-SNAPSHOT.jar"
-  }
-}
-{
+  },
   "devDependencies": {
     "jdeploy": "6.0.19"
   }
