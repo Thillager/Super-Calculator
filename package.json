@@ -1,8 +1,8 @@
 {
-  "name": "mein-projekt",
-  "version": "1.0.0",
+  "name": "Super-Calculator",
+  "version": "1.1.0",
   "jdeploy": {
-    "mainClass": "com.beispiel.Main",
+    "mainClass": "Main",
     "jar": "target/myartifactid-0.0-SNAPSHOT.jar"
   }
 }
